@@ -1,7 +1,7 @@
 'use strict'
 const KEY = 'meme';
-//var gMemes = [];
 var gMeme = {};
+var gSavedMems = [];
 
 function createMeme(imgId){
     gMeme = {
@@ -13,7 +13,8 @@ function createMeme(imgId){
         align: 'center',
         color: 'blue',
         x: 250,
-        y:50}
+        y:50,
+        isDragging: false}
         ]
     };
     return gMeme;
@@ -34,14 +35,14 @@ function addLine(){
         align: 'center',
         color: 'blue',
         x: 250,
-        y:yPos
+        y:yPos,
+        isDragging: false
     }
     gMeme.lines.push(line);
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 function deleteLine(){
-    //debugger;
     gMeme.lines.splice(gMeme.selectedLineIdx,1);
     if (gMeme.selectedLineIdx>0){
         gMeme.selectedLineIdx--;
@@ -68,6 +69,10 @@ function getMemeSelectedId(){
     return gMeme.selectedImgId;
 }
 
+function setCurrMeme(currMeme){
+    gMeme = currMeme;
+}
+
 function changeFocus(){
     if (gMeme.selectedLineIdx === gMeme.lines.length - 1){
         gMeme.selectedLineIdx = 0;
@@ -82,4 +87,18 @@ function getMemeLineSelected(){
 
 function updateMeme(memeText){
     gMeme.lines[gMeme.selectedLineIdx].txt = memeText;    
+}
+
+function SaveMeme(){
+    gSavedMems = loadFromStorage(KEY);
+    if (!gSavedMems){
+        gSavedMems = [];
+    }
+    gSavedMems.push(gMeme);
+    saveToStorage(KEY,gSavedMems);
+}
+
+function loadMeme(){
+    gSavedMems = loadFromStorage(KEY);
+    return gSavedMems;
 }
