@@ -80,11 +80,13 @@ function onChangeTextPos(diff){
 
 function onChangeFocus(){
     changeFocus();
+    deleteTextEdit();
     renderCanvas();
 }
 
 function onAddLine(){
     addLine();
+    deleteTextEdit();
     renderCanvas();
 }
 
@@ -116,6 +118,7 @@ function onMemesClick(){
 
 function onDeleteLine(){
     deleteLine();
+    deleteTextEdit();
     renderCanvas();
 }
 
@@ -137,7 +140,7 @@ function onDown(ev) {
     gCurrMeme.isDragging = true
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
-
+    deleteTextEdit();
 }
 
 function onMove(ev) {
@@ -183,4 +186,8 @@ function isTextClicked(clickedPos) {
         }
     }
     return false;
+}
+
+function deleteTextEdit(){
+    document.querySelector('.item1').value = '';
 }

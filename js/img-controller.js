@@ -20,7 +20,7 @@ function renderSearchGallery(){
     document.querySelector('.search-words').innerHTML = strHtml;
 
     strHtml = searchWords.map(function (word,index) {
-        return `<p class="${word} item${index}" onclick="onWordClick('${word}')">${word}</p>`;
+        return `<p class="${word} item-search${index}" onclick="onWordClick('${word}')">${word}</p>`;
     }).join('');
     document.querySelector('.search-grid').innerHTML = strHtml;
 }
