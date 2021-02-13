@@ -14,7 +14,7 @@
 
     <header class="main-header">
           <div class="header-container main-container flex align-item-center spcae-between">
-                <div class="capitalize logo">memegen</div>
+                <div class="logo"></div>
                 <ul class="navbar-conntainer clean-ul flex">
                       <li><a href="" class="flex align-item-center capitalize nav-item">gallery</a></li>
                       <li onclick="onMemesClick()"><a href="javascript:void(0)" class="flex align-item-center capitalize nav-item">mems</a></li>
@@ -24,10 +24,10 @@
           </div>
     </header>
 
-    <section id="main-search" class="main-search">
+    <section id="main-search" class="main-search-grid">
         <div class="search-words">
         </div>
-        <div class="search-grid flex">
+        <div class="search-grid">
         </div>
     </section>
 
@@ -38,7 +38,7 @@
 
     <div id="meme-edit" class="meme-edit hide flex">
         <div class="canvas-container">
-            <canvas id="meme-canvas" height="500" width="500"></canvas>
+            <canvas id="meme-canvas"></canvas>
         </div>
         <div class="edit-canvas">
             <input type="text" class="item1" oninput="onInputChange(this.value)" id="meme-text" name="meme-text">

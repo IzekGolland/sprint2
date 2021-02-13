@@ -10,6 +10,7 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 function initMemeEditor(imageId){
     gCurrMeme = createMeme(imageId);
     renderCanvas();
+    resizeCanvas()
 }
 
 function renderCanvas(){
@@ -19,23 +20,6 @@ function renderCanvas(){
     gCurrMeme = getMeme();
     var imageId = getMemeSelectedId();
     drawImg(imageId);
-}
-
-function addListeners() {
-    addMouseListeners()
-    addTouchListeners()
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderCanvas()
-    })
-}
-
-function addTouchListeners() {
-    gElCanvas[0].addEventListener('touchmove', onMove)
-
-    gElCanvas[0].addEventListener('touchstart', onDown)
-
-    gElCanvas[0].addEventListener('touchend', onUp)
 }
 
 function renderMemesCanvas(memes){
@@ -118,6 +102,33 @@ function onAddLine(){
     renderCanvas();
 }
 
+/*function onSavedImageClick(meme){
+    //console.log(JSON.stringify(meme));
+    
+    var element = document.getElementById("image-gallery");
+    element.classList.add("hide");
+    element.classList.remove("show");
+    var element = document.getElementById("main-search");
+    element.classList.add("hide");
+    element.classList.remove("show");
+    var element = document.getElementById("meme-edit");
+    element.classList.add("show");
+    element.classList.remove("hide");
+
+    setCurrMeme(meme);
+    renderCanvas();
+}*/
+
+function onDeleteLine(){
+    deleteLine();
+    deleteTextEdit();
+    renderCanvas();
+}
+
+function onSaveMeme(){
+    SaveMeme();
+}
+
 function onMemesClick(){
     var element = document.getElementById("main-search");
     element.classList.add("hide");
@@ -136,30 +147,12 @@ function onMemesClick(){
     if (gMemes){
         var strHtml = gMemes.map(function (meme,index) {
             return `
-            <canvas id="save-canvas${index}" height="500" width="500"></canvas>`
+            <canvas id="save-canvas${index}" height="500" width="500" onclick="onSavedImageClick('${meme}')"></canvas>`
         }).join('');
         document.querySelector('.grid-mems').innerHTML = strHtml;
     
         renderMemesCanvas(gMemes);
     }
-}
-
-function onDeleteLine(){
-    deleteLine();
-    deleteTextEdit();
-    renderCanvas();
-}
-
-function onSaveMeme(){
-    SaveMeme();
-}
-
-function addMouseListeners() {
-    gElCanvas[0].addEventListener('mousemove', onMove)
-
-    gElCanvas[0].addEventListener('mousedown', onDown)
-
-    gElCanvas[0].addEventListener('mouseup', onUp)
 }
 
 function onDown(ev) {
@@ -176,10 +169,8 @@ function onMove(ev) {
         const pos = getEvPos(ev)
         const dx = pos.x - gStartPos.x
         const dy = pos.y - gStartPos.y
-
         gCurrMeme.lines[gCurrMeme.selectedLineIdx].x += dx
         gCurrMeme.lines[gCurrMeme.selectedLineIdx].y += dy
-
         gStartPos = pos
         renderCanvas()
     }
@@ -230,4 +221,25 @@ function isTextClicked(clickedPos) {
 
 function deleteTextEdit(){
     document.querySelector('.item1').value = '';
+}
+
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+}
+
+function addTouchListeners() {
+    gElCanvas[0].addEventListener('touchmove', onMove)
+
+    gElCanvas[0].addEventListener('touchstart', onDown)
+
+    gElCanvas[0].addEventListener('touchend', onUp)
+}
+
+function addMouseListeners() {
+    gElCanvas[0].addEventListener('mousemove', onMove)
+
+    gElCanvas[0].addEventListener('mousedown', onDown)
+
+    gElCanvas[0].addEventListener('mouseup', onUp)
 }
