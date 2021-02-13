@@ -47,7 +47,7 @@ body{
 .search-grid{
     display: grid;
     width: 100%;
-    column-gap: 40px;
+    column-gap: 10px;
     grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
     grid-template-rows: 20px;
     justify-content: center;
@@ -251,5 +251,19 @@ canvas{
         margin: 0 auto;
         margin-top: 20px;
     }        
+    .search-grid{
+        column-gap: 0px;
+        grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+    }
+    .words{
+        margin-left: 0rem;
+    }
+    .grid-container {
+        width: 100%;
+        padding: 15px 1rem 15px 1rem;
+    }
+    .main-header .logo {
+        margin-left: 1rem;
+    }   
 }
 
