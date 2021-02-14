@@ -36,9 +36,9 @@
         </section>
     </div>
 
-    <div id="meme-edit" class="meme-edit hide flex">
+    <div id="meme-edit" class="meme-edit flex hide">
         <div class="canvas-container">
-            <canvas id="meme-canvas"></canvas>
+            <canvas class="meme-canvas" id="meme-canvas" width="500" height="500"></canvas>
         </div>
         <div class="edit-canvas">
             <input type="text" class="item1" oninput="onInputChange(this.value)" id="meme-text" name="meme-text">
@@ -54,6 +54,10 @@
             src="icons/trash.png">
             <input type="image" class="item9" id="image" onClick="onSaveMeme()" alt="save"
             src="icons/github-logo.png">
+            
+            <label for="upload-photo" class="upload-photo">Browse...</label>
+            <input type="file" name="image" id="upload-photo" onchange="onImgInput(event)" />
+
         </div>
     </div>
 

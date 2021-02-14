@@ -48,6 +48,22 @@ function deleteLine(){
         gMeme.selectedLineIdx--;
     } 
 }
+function getNewMeme() {
+    gMeme = {
+        selectedImgId: null,
+        selectedLineIdx: 0,
+        lines: [
+        {txt: 'Enter Text Here',
+        size: 50,
+        align: 'center',
+        color: 'blue',
+        x: 250,
+        y:50,
+        isDragging: false}
+        ]
+    };
+    return gMeme;
+}
 
 function getMeme(){
     return gMeme;
